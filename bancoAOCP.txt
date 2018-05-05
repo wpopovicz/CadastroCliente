@@ -1,0 +1,40 @@
+CREATE SCHEMA oacp
+    AUTHORIZATION postgres;
+
+CREATE TABLE oacp.cliente
+(
+    id integer NOT NULL DEFAULT nextval('oacp.cliente_id_seq'::regclass),
+    nome character varying(100) COLLATE pg_catalog."default" NOT NULL,
+    tipo boolean NOT NULL,
+    data date NOT NULL,
+    cpf character varying(14) COLLATE pg_catalog."default",
+    cnpj character varying(18) COLLATE pg_catalog."default",
+    CONSTRAINT cliente_pkey PRIMARY KEY (id)
+);
+CREATE TABLE oacp.contato
+(
+    id integer NOT NULL DEFAULT nextval('oacp.contato_id_seq'::regclass),
+    id_cliente integer NOT NULL,
+    tipo character varying(15) COLLATE pg_catalog."default" NOT NULL,
+    numero character varying(15) COLLATE pg_catalog."default" NOT NULL,
+    operadora character varying(15) COLLATE pg_catalog."default",
+    CONSTRAINT contato_pkey PRIMARY KEY (id),
+    CONSTRAINT id_cliente FOREIGN KEY (id_cliente)
+        REFERENCES oacp.cliente (id) MATCH SIMPLE
+        ON UPDATE NO ACTION
+        ON DELETE NO ACTION
+);
+CREATE TABLE oacp.endereco
+(
+    id integer NOT NULL DEFAULT nextval('oacp.endereco_id_seq'::regclass),
+    id_cliente integer NOT NULL,
+    logradouro character varying(150) COLLATE pg_catalog."default" NOT NULL,
+    numero character varying(10) COLLATE pg_catalog."default" NOT NULL,
+    cidade character varying(50) COLLATE pg_catalog."default" NOT NULL,
+    estado character(2) COLLATE pg_catalog."default" NOT NULL,
+    CONSTRAINT endereco_pkey PRIMARY KEY (id),
+    CONSTRAINT id_cliente FOREIGN KEY (id_cliente)
+        REFERENCES oacp.cliente (id) MATCH SIMPLE
+        ON UPDATE NO ACTION
+        ON DELETE NO ACTION
+);
