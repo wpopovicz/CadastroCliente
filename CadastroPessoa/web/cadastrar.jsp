@@ -142,8 +142,8 @@
                             </div>
                         </div>
                         <div id="destino"></div>
-                        <img  src="./img/add.png" style="cursor: pointer; padding: 5px;" onclick="duplicarCampos();">
-                        <img  src="./img/remove.png" style="cursor: pointer; padding: 5px;" onclick="removerCampos(this);"> 
+                        <img  src="./img/add.png" style="cursor: pointer; padding: 5px;" onclick="duplicarCampos();" data-toggle="tooltip" data-placement="bottom" title="Adicionar mais contato">
+                        <img  src="./img/remove.png" style="cursor: pointer; padding: 5px;" onclick="removerCampos(this);" data-toggle="tooltip" data-placement="bottom" title="Remover contato"> 
 
                         <div id="origemEnd" class="row">
                             <div class="col-md-4 col-sm-9">
@@ -172,11 +172,11 @@
                             </div>
                         </div>
                         <div id="destinoEnd"></div>
-                        <img  src="./img/add.png" style="cursor: pointer; padding: 5px;" onclick="duplicarCamposEnd();">
-                        <img  src="./img/remove.png" style="cursor: pointer; padding: 5px;" onclick="removerCamposEnd(this);"> 
+                        <img  src="./img/add.png" style="cursor: pointer; padding: 5px;" onclick="duplicarCamposEnd();" data-toggle="tooltip" data-placement="bottom" title="Adicionar mais endereço">
+                        <img  src="./img/remove.png" style="cursor: pointer; padding: 5px;" onclick="removerCamposEnd(this);" data-toggle="tooltip" data-placement="bottom" title="Remover endereço"> 
 
                         <div style="text-align: right;">
-                            <button type="button" class="btn btn-success " onClick="validarDados()"><i class="fa fa-check" aria-hidden="true"></i>  Salvar dados</button>
+                            <button type="button" class="btn btn-success " onClick="validarDados()"><i class="fa fa-check" aria-hidden="true" ></i>  Salvar dados</button>
                         </div>
                     </form>
                 </main>

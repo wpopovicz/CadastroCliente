@@ -283,6 +283,8 @@
                     alert("Selecione o tipo do cliente");
                     document.form1.tipo.focus();
                 }
-            }
-            ;
+            };
+            $(function () {
+                $('[data-toggle="tooltip"]').tooltip();
+            });
         </script>

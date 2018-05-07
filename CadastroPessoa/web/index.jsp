@@ -22,6 +22,26 @@
             <div class="row">
                 <jsp:include page="include/menu.jsp" />
                 <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-4" style="padding-top: 40px;">
+                    <%
+                        String erro = (String) request.getAttribute("erro");
+                        String mensagem = (String) request.getAttribute("mensagem");
+                        if(erro != null && erro.equals("true")){
+                            if (mensagem != null) {%>
+                            <div class="alert alert-danger alert-dismissible fade show" role="alert" >
+                                <strong>${mensagem}</strong>
+                                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </div>
+                    <%      }
+                        }else{
+                            if (mensagem != null) {%>
+                            <div class="alert alert-success alert-dismissible fade show" role="alert" >
+                                <strong>${mensagem}</strong>
+                                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </div>
+                    <%      }
+                        }%>
                     <h1 class="h2">Exemplo Cadastro</h1>
                 </main>
             </div>
