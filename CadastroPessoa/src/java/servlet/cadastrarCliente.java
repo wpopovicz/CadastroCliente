@@ -42,7 +42,7 @@ public class cadastrarCliente extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        
+
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
@@ -87,26 +87,26 @@ public class cadastrarCliente extends HttpServlet {
             nome = request.getParameter("nome");
             data = request.getParameter("data");
             cpf = request.getParameter("cpf");
+            if (daoCliente.verificarCPF(cpf)) {
+                msg = "Cadastro Efetuado com sucesso!";
+            } else {
+                request.setAttribute("erro", "true");
+                request.setAttribute("mensagem", "Já possui registro com esse CPF !");
+                RequestDispatcher rd = request.getRequestDispatcher("index.jsp");
+                rd.forward(request, response);
+            }
         } else {
             nome = request.getParameter("nome1");
             data = request.getParameter("data1");
             cnpj = request.getParameter("cnpj");
-        }
-        if (daoCliente.verificarCPF(cpf)) {
-            msg = "Cadastro Efetuado com sucesso!";
-        } else {
-            request.setAttribute("erro", "true");
-            request.setAttribute("mensagem", "Já possui registro com esse CPF !");
-            RequestDispatcher rd = request.getRequestDispatcher("index.jsp");
-            rd.forward(request, response);
-        }
-        if (daoCliente.verificarCNPJ(cnpj)) {
-            msg = "Cadastro Efetuado com sucesso!";
-        } else {
-            request.setAttribute("erro", "true");
-            request.setAttribute("mensagem", "Já possui registro com esse CNPJ !");
-            RequestDispatcher rd = request.getRequestDispatcher("index.jsp");
-            rd.forward(request, response);
+            if (daoCliente.verificarCNPJ(cnpj)) {
+                msg = "Cadastro Efetuado com sucesso!";
+            } else {
+                request.setAttribute("erro", "true");
+                request.setAttribute("mensagem", "Já possui registro com esse CNPJ !");
+                RequestDispatcher rd = request.getRequestDispatcher("index.jsp");
+                rd.forward(request, response);
+            }
         }
         byte ar[] = nome.getBytes("ISO-8859-1");
         String nomeCerto = new String(ar, "UTF-8");
@@ -127,11 +127,11 @@ public class cadastrarCliente extends HttpServlet {
                 rd.forward(request, response);
             }
             idCliente = daoCliente.getUltimoId();
-            
+
         } catch (ParseException ex) {
             Logger.getLogger(cadastrarCliente.class.getName()).log(Level.SEVERE, null, ex);
         }
-        
+
         String[] tipoTelefone = request.getParameterValues("tipoTelefone[]");
         String[] telefone = request.getParameterValues("telefone[]");
         String[] operadoraTelefone = request.getParameterValues("operadoraTelefone[]");
