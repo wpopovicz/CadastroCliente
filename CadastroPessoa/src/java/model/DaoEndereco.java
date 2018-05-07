@@ -5,19 +5,16 @@
  */
 package model;
 
-import beans.Cliente;
+import beans.Endereco;
 import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.ResultSet;
 import java.sql.Statement;
 
 /**
  *
  * @author Popovicz
  */
-public class DaoCliente {
-
-    public int inserir(Cliente cli) {
+public class DaoEndereco {
+    public boolean inserir(Endereco endereco) {
         Connection c = null;
         Statement stmt = null;
         int ultimoId = 0;
@@ -25,21 +22,17 @@ public class DaoCliente {
             Conexao con = new Conexao();
             c = con.Conectar();
             stmt = c.createStatement();
-            String sql = "INSERT INTO oacp.cliente (id,nome,tipo,data,cpf,cnpj) "
-                    + "VALUES ('', '" + cli.getNome() + "', '" + cli.isTipo() + "', '" + cli.getData() + "','" + cli.getCpf() + "','" + cli.getCnpj() + "' );";
-            stmt.executeUpdate(sql);
-            ResultSet rsID = stmt.getGeneratedKeys();
-            if (rsID.next()) {
-               ultimoId = rsID.getInt("id");
-            }
+            String sql = "INSERT INTO oacp.endereco (id,id_cliente,logradouro,numero,cidade,estado) "
+                    + "VALUES ('', '" + endereco.getId_cliente() + "', '" + endereco.getLogradouro() + "', '" + endereco.getNumero() + "','" + endereco.getCidade() + "','" + endereco.getEstado() + "' );";
+            stmt.executeUpdate(sql);            
             stmt.close();
             c.commit();
             c.close();
         } catch (Exception e) {
             System.err.println(e.getClass().getName() + ": " + e.getMessage());
             System.exit(0);
-            return ultimoId;
+            return false;
         }
-        return ultimoId;
+        return true;
     }
 }
